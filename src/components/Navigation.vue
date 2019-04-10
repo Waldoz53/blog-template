@@ -1,15 +1,30 @@
 <template>
   <div class="navigation">
     <div class="navigation-title">
-      <div class="navigation-left">
-        <img src="https://i.imgur.com/zu076xv.png" alt="blog template's icon">
-        <h1>Blog Template</h1>
-      </div>
-      <span @click="showMenu" class="mdi mdi-menu mdi-48px clickable menu"></span>
+      <router-link class="navigation-left" to="/">
+        <img
+          to="/"
+          src="https://i.imgur.com/zu076xv.png"
+          alt="blog template's icon"
+        />
+        <h1 to="/">Blog Template</h1>
+      </router-link>
+      <span
+        @click="showMenu"
+        class="mdi mdi-48px clickable menu"
+        v-bind:class="[isHidden ? 'mdi-menu' : 'mdi-close']"
+      ></span>
       <div class="desktop-menu">
         <div class="desktop-login">
-          <p>Login</p>
-          <p>About</p>
+          <router-link to="/login">
+            <p>Login</p>
+          </router-link>
+          <router-link to="/signup">
+            <p>Sign Up</p>
+          </router-link>
+          <router-link to="/about">
+            <p>About</p>
+          </router-link>
         </div>
 
         <!-- <div class="desktop-logout"> commented out until login systems are available -->
@@ -22,8 +37,15 @@
 
     <div class="mobile-menu" v-bind:class="[isHidden ? hideClass : '']">
       <div class="navigation-login">
-        <p>Login</p>
-        <p>About</p>
+        <router-link to="/login">
+          <p>Login</p>
+        </router-link>
+        <router-link to="/signup">
+          <p>Sign Up</p>
+        </router-link>
+        <router-link to="/about">
+          <p>About</p>
+        </router-link>
       </div>
 
       <!-- <div class="navigation-logout"> commented out until login systems are available -->
@@ -32,8 +54,6 @@
       <!-- <p>About</p> -->
       <!-- </div> -->
     </div>
-
-
   </div>
 </template>
 
@@ -44,7 +64,7 @@ export default {
     return {
       isHidden: true,
       hideClass: "hidden"
-    }
+    };
   },
   methods: {
     showMenu() {
@@ -62,9 +82,9 @@ export default {
 .navigation {
   background: var(--header-color);
   color: var(--leading-text);
-  font-family: var(--main-font);
   text-align: center;
   padding: 16px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .navigation-left {
   display: flex;
@@ -106,7 +126,7 @@ p {
 }
 
 .mobile-menu {
-  margin: 16px;
+  margin: 8px;
 }
 .navigation-login {
   display: flex;
@@ -117,7 +137,8 @@ p {
 }
 
 @media (min-width: 1000px) {
-  .mobile-menu, .menu {
+  .mobile-menu,
+  .menu {
     display: none;
   }
 
