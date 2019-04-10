@@ -5,16 +5,43 @@
     </div>
     <div class="login-form">
       <form>
-        <input type="text" name="email" placeholder="Email" />
-        <input type="password" name="password" placeholder="Password" />
-        <button type="button" name="button">Login</button>
+        <input
+          type="text"
+          v-model="email"
+          placeholder="Email"
+          autocomplete="email"
+        />
+        <input
+          type="password"
+          v-model="password"
+          placeholder="Password"
+          autocomplete="password"
+        />
+        <button type="button" @click="submit">Login</button>
       </form>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "Login",
+  data() {
+    return {
+      valid: false,
+      email: "",
+      password: ""
+    };
+  },
+  methods: {
+    submit() {
+      this.$store.dispatch("userLogin", {
+        email: this.email,
+        password: this.password
+      });
+    }
+  }
+};
 </script>
 
 <style lang="css" scoped>

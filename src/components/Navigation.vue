@@ -15,7 +15,7 @@
         v-bind:class="[isHidden ? 'mdi-menu' : 'mdi-close']"
       ></span>
       <div class="desktop-menu">
-        <div class="desktop-login">
+        <div v-if="!isAuthenticated" class="desktop-login">
           <router-link to="/login">
             <p>Login</p>
           </router-link>
@@ -27,16 +27,20 @@
           </router-link>
         </div>
 
-        <!-- <div class="desktop-logout"> commented out until login systems are available -->
-        <!-- <p>Write</p> -->
-        <!-- <p>Logout</p> -->
-        <!-- <p>About</p> -->
-        <!-- </div> -->
+        <div v-else class="desktop-logout">
+          <router-link to="/write">
+            <p>Write</p>
+          </router-link>
+          <a @click="signOut"><p>Log Out</p></a>
+          <router-link to="/about">
+            <p>About</p>
+          </router-link>
+        </div>
       </div>
     </div>
 
     <div class="mobile-menu" v-bind:class="[isHidden ? hideClass : '']">
-      <div class="navigation-login">
+      <div v-if="!isAuthenticated" class="navigation-login">
         <router-link to="/login">
           <p>Login</p>
         </router-link>
@@ -48,11 +52,15 @@
         </router-link>
       </div>
 
-      <!-- <div class="navigation-logout"> commented out until login systems are available -->
-      <!-- <p>Write</p> -->
-      <!-- <p>Logout</p> -->
-      <!-- <p>About</p> -->
-      <!-- </div> -->
+      <div v-else class="navigation-logout">
+        <router-link to="/write">
+          <p>Write</p>
+        </router-link>
+        <a @click="signOut"><p>Log Out</p></a>
+        <router-link to="/about">
+          <p>About</p>
+        </router-link>
+      </div>
     </div>
   </div>
 </template>
@@ -73,6 +81,14 @@ export default {
       } else {
         this.isHidden = true;
       }
+    },
+    signOut() {
+      this.$store.dispatch("userSignOut");
+    }
+  },
+  computed: {
+    isAuthenticated() {
+      return this.$store.state.isAuthenticated;
     }
   }
 };
@@ -103,45 +119,42 @@ p {
   justify-content: center;
   align-items: center;
 }
-
 .navigation-left img {
   width: 48px;
   margin-right: 10px;
 }
-
 .desktop-menu {
   display: none;
 }
-
-.desktop-login {
+.desktop-login,
+.desktop-logout {
   margin: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-.desktop-login p {
+.desktop-login p,
+.desktop-logout p {
   margin-left: 16px;
   margin-right: 16px;
 }
-
 .mobile-menu {
   margin: 8px;
 }
 .navigation-login {
   display: flex;
 }
-
+.navigation-logout {
+  display: flex;
+}
 .hidden {
   display: none;
 }
-
 @media (min-width: 1000px) {
   .mobile-menu,
   .menu {
     display: none;
   }
-
   .desktop-menu {
     display: flex;
   }

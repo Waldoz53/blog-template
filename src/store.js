@@ -1,7 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import firebase from "firebase";
-// import router from "@/router";
+import router from "@/router";
 
 Vue.use(Vuex);
 
@@ -20,12 +20,12 @@ const db = firebase.firestore();
 export default new Vuex.Store({
   state: {
     posts: [],
-    user: null,
+    username: null,
     isAuthenticated: false
   },
   mutations: {
     setUser(state, payload) {
-      state.user = payload;
+      state.username = payload;
     },
     setIsAuthenticated(state, payload) {
       state.isAuthenticated = payload;
@@ -45,10 +45,45 @@ export default new Vuex.Store({
               admin: false
             })
         )
+        .then(
+          () => commit("setUser", "alive"),
+          commit("setIsAuthenticated", true),
+          router.push("/")
+        )
         .catch(function(error) {
           alert(error);
           commit("setUser", null);
           commit("setIsAuthenticated", false);
+        });
+    },
+    userLogin({ commit }, { email, password }) {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then(
+          () => commit("setUser", "alive"),
+          commit("setIsAuthenticated", true),
+          router.push("/")
+        )
+        .catch(function(error) {
+          alert(error);
+          commit("setUser", null);
+          commit("setIsAuthenticated", false);
+        });
+    },
+    userSignOut({ commit }) {
+      firebase
+        .auth()
+        .signOut()
+        .then(() => {
+          commit("setUser", null);
+          commit("setIsAuthenticated", false);
+          router.push("/");
+        })
+        .catch(() => {
+          commit("setUser", null);
+          commit("setIsAuthenticated", false);
+          router.push("/");
         });
     }
   }
