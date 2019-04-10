@@ -5,17 +5,51 @@
     </div>
     <div class="signup-form">
       <form>
-        <input type="text" name="username" placeholder="Username" />
-        <input type="text" name="email" placeholder="Email" />
-        <input type="password" name="password" placeholder="Password" />
-        <button type="button" name="button">Sign Up!</button>
+        <input
+          type="text"
+          v-model="username"
+          placeholder="Username"
+          autocomplete="username"
+        />
+        <input
+          type="text"
+          v-model="email"
+          placeholder="Email"
+          autocomplete="email"
+        />
+        <input
+          type="password"
+          v-model="password"
+          placeholder="Password"
+          autocomplete="password"
+        />
+        <button type="button" @click="submit">Sign Up!</button>
       </form>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  name: "Signup",
+  data() {
+    return {
+      valid: false,
+      username: "",
+      email: "",
+      password: ""
+    };
+  },
+  methods: {
+    submit() {
+      this.$store.dispatch("userSignup", {
+        username: this.username,
+        email: this.email,
+        password: this.password
+      });
+    }
+  }
+};
 </script>
 
 <style lang="css" scoped>
