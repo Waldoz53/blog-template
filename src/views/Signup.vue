@@ -58,6 +58,7 @@ export default {
   max-width: 800px;
   margin: var(--half-margin) auto;
   margin-top: var(--margin);
+  margin-bottom: 0;
   background: white;
   box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
 }
