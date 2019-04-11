@@ -29,6 +29,7 @@
 
 <script>
 import Card from "@/components/Card";
+import firebase from "firebase";
 
 export default {
   name: "Home",

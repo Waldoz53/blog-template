@@ -7,6 +7,7 @@
       <p>
         {{ date }} by <strong>{{ author }}</strong>
       </p>
+      <p>{{ content }}</p>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
@@ -57,7 +58,8 @@ export default {
     title: String,
     date: String,
     author: String,
-    commentNum: String
+    commentNum: String,
+    content: String
   }
 };
 </script>

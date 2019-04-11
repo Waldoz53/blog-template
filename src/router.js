@@ -1,10 +1,16 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Home from "./views/Home.vue";
+import About from "./views/About.vue";
+import Login from "./views/Login.vue";
+import Signup from "./views/Signup.vue";
+import Write from "./views/Write.vue";
+
+import firebase from "firebase";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
@@ -16,17 +22,36 @@ export default new Router({
     {
       path: "/about",
       name: "about",
-      component: () => import("./views/About.vue")
+      component: About
     },
     {
       path: "/login",
       name: "login",
-      component: () => import("./views/Login.vue")
+      component: Login
     },
     {
       path: "/signup",
       name: "signup",
-      component: () => import("./views/Signup.vue")
+      component: Signup
+    },
+    {
+      path: "/write",
+      name: "write",
+      component: Write,
+      meta: {
+        requiresAuth: true
+      }
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  let currentUser = firebase.auth().currentUser;
+  let requiresAuth = to.matched.some(record => record.meta.requiresAuth);
+
+  if (requiresAuth && !currentUser) {
+    next("/login");
+  } else next();
+});
+
+export default router;

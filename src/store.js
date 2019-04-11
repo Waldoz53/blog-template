@@ -19,7 +19,6 @@ const db = firebase.firestore();
 
 export default new Vuex.Store({
   state: {
-    posts: [],
     username: null,
     isAuthenticated: false
   },
