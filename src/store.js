@@ -1,31 +1,17 @@
 import Vue from "vue";
 import Vuex from "vuex";
-import firebase from "firebase";
 import router from "@/router";
+import firebase from "@/firebase/firebase";
 
 Vue.use(Vuex);
-
-var config = {
-  apiKey: "AIzaSyABPTSOIehOWXrIrTlZLsAfjcou_f3oy1s",
-  authDomain: "blog-template-e8082.firebaseapp.com",
-  databaseURL: "https://blog-template-e8082.firebaseio.com",
-  projectId: "blog-template-e8082",
-  storageBucket: "blog-template-e8082.appspot.com",
-  messagingSenderId: "589851773038"
-};
-firebase.initializeApp(config);
 
 const db = firebase.firestore();
 
 export default new Vuex.Store({
   state: {
-    username: null,
     isAuthenticated: false
   },
   mutations: {
-    setUser(state, payload) {
-      state.username = payload;
-    },
     setIsAuthenticated(state, payload) {
       state.isAuthenticated = payload;
     }
@@ -44,14 +30,9 @@ export default new Vuex.Store({
               admin: false
             })
         )
-        .then(
-          () => commit("setUser", "alive"),
-          commit("setIsAuthenticated", true),
-          router.push("/")
-        )
+        .then(() => commit("setIsAuthenticated", true), router.push("/"))
         .catch(function(error) {
           alert(error);
-          commit("setUser", null);
           commit("setIsAuthenticated", false);
         });
     },
@@ -59,14 +40,9 @@ export default new Vuex.Store({
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
-        .then(
-          () => commit("setUser", "alive"),
-          commit("setIsAuthenticated", true),
-          router.push("/")
-        )
+        .then(() => commit("setIsAuthenticated", true), router.push("/"))
         .catch(function(error) {
           alert(error);
-          commit("setUser", null);
           commit("setIsAuthenticated", false);
         });
     },
@@ -75,12 +51,10 @@ export default new Vuex.Store({
         .auth()
         .signOut()
         .then(() => {
-          commit("setUser", null);
           commit("setIsAuthenticated", false);
           router.push("/");
         })
         .catch(() => {
-          commit("setUser", null);
           commit("setIsAuthenticated", false);
           router.push("/");
         });

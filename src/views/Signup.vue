@@ -8,7 +8,7 @@
         <input
           type="text"
           v-model="username"
-          placeholder="Username"
+          placeholder="Username/Display Name"
           autocomplete="username"
         />
         <input

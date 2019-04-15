@@ -1,26 +1,34 @@
 <template lang="html">
   <div class="about">
     <div class="about-top">
-      <h1>About Blog</h1>
+      <h1>About Blog Template</h1>
     </div>
     <div class="about-content">
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
+        This site is a blog built with Vue, Vuex, Vue Router and Firebase as a
+        serverless backend. The site was designed in Figma by me, Waleed. The
+        goal of this site is that it is a generic template that I can quickly
+        rebuild, recolor, and change Firebase configuration so that anyone can
+        buy or use the template.
       </p>
       <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
+        Since I'm using CSS variables through the styles in the entire project,
+        the idea is that I can swap colors and fonts quickly and easily for
+        other people to use for their own version of the site.
+      </p>
+      <p>
+        Firebase itself is also very easy to set up as well, compared to a full
+        Node.js, Express, and MongoDB stack, and will only eventually require
+        changing the Firebase API keys. Any special features that might be added
+        will be mentioned here and on the home page as a blog post (yay!)
+      </p>
+      <br />
+      <br />
+      <p>
+        There is a to-do list along with the source code on the
+        <a href="https://github.com/Waldoz53/blog-template" target="_blank"
+          >Github page here.</a
+        >
       </p>
     </div>
   </div>
@@ -53,4 +61,14 @@ h1 {
 .about-content p {
   margin-bottom: var(--half-margin);
 }
+a {
+  all: unset;
+  cursor: pointer;
+  text-decoration: underline;
+  color: blue;
+}
+a:visited {
+  color: purple;
+}
+/* anchor tag set to default styles so the link is actually visible and clickable */
 </style>
