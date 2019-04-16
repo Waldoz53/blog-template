@@ -13,7 +13,7 @@
         @click="showMenu"
         class="mdi mdi-48px clickable menu"
         v-bind:class="[isHidden ? 'mdi-menu' : 'mdi-close']"
-      ></span>
+      >X</span>
       <div class="desktop-menu">
         <div v-if="!isAuthenticated" class="desktop-login">
           <router-link to="/login">
@@ -32,7 +32,7 @@
             <p>Write</p>
           </router-link>
           <router-link to="/about">
-            <p>About</p>
+            <p>Profile</p>
           </router-link>
           <a @click="signOut"><p>Log Out</p></a>
         </div>
@@ -57,7 +57,7 @@
           <p>Write</p>
         </router-link>
         <router-link to="/about">
-          <p>About</p>
+          <p>Profile</p>
         </router-link>
         <a @click="signOut"><p>Log Out</p></a>
       </div>
@@ -71,7 +71,8 @@ export default {
   data() {
     return {
       isHidden: true,
-      hideClass: "hidden"
+      hideClass: "hidden",
+      username: this.$store.state.username
     };
   },
   methods: {
