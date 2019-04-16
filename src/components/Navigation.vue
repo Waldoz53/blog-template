@@ -96,11 +96,6 @@ export default {
 
 <style scoped>
 .navigation {
-  background: var(--header-color);
-  color: var(--leading-text);
-  text-align: center;
-  padding: 16px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 .navigation-left {
   display: flex;
@@ -118,6 +113,10 @@ p {
   display: flex;
   justify-content: center;
   align-items: center;
+  background: var(--header-color);
+  color: var(--leading-text);
+  text-align: center;
+  padding: 16px;
 }
 .navigation-left img {
   width: 48px;
@@ -139,7 +138,14 @@ p {
   margin-right: 16px;
 }
 .mobile-menu {
-  margin: 8px;
+  transition: 0.2s;
+  opacity: 1;
+  transform: translateX(0px);
+  background: var(--header-color);
+  color: var(--leading-text);
+  text-align: center;
+  padding: 8px;
+  padding-bottom: 24px;
 }
 .navigation-login {
   display: flex;
@@ -148,7 +154,9 @@ p {
   display: flex;
 }
 .hidden {
-  display: none;
+  opacity: 0;
+  transform: translateX(-50px);
+  margin-bottom: -50px;
 }
 @media (min-width: 1000px) {
   .mobile-menu,
