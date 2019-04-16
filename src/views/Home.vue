@@ -1,15 +1,26 @@
 <template lang="html">
   <div class="home">
-    <!-- disabled linting for this one because firebase sorts the array/documents itself. will change once necessary -->
-    <!-- eslint-disable-next-line -->
-    <div v-for="post in posts">
-      <Card
-        v-bind:title="post.title"
-        v-bind:author="post.author"
-        v-bind:date="post.date"
-        v-bind:content="post.content"
-        v-bind:commentNum="post.comments"
-      />
+    <div v-if="!data">
+      <Loader />
+    </div>
+    <div v-else>
+      <!-- disabled linting for this one because firebase sorts the array/documents itself. will change once necessary -->
+      <!-- eslint-disable-next-line -->
+      <div v-for="post in posts">
+        <Card
+          v-bind:title="post.title"
+          v-bind:author="post.author"
+          v-bind:date="post.date"
+          v-bind:content="post.content"
+          v-bind:commentNum="post.comments"
+        />
+      </div>
+    </div>
+    <div v-if="!data">
+      <Loader />
+      <Loader />
+      <Loader />
+      <Loader />
     </div>
     <Card
       title="Blog Post #4"
@@ -44,15 +55,18 @@
 
 <script>
 import Card from "@/components/Card";
+import Loader from "@/components/Loader";
 import firebase from "@/firebase/firebase";
 
 export default {
   name: "Home",
   components: {
-    Card
+    Card,
+    Loader
   },
   data() {
     return {
+      data: null,
       posts: [],
       ref: firebase
         .firestore()
@@ -72,6 +86,7 @@ export default {
           comments: doc.data().comments
         });
       });
+      this.data = true;
     });
   }
 };

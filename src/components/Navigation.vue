@@ -31,10 +31,10 @@
           <router-link to="/write">
             <p>Write</p>
           </router-link>
-          <a @click="signOut"><p>Log Out</p></a>
           <router-link to="/about">
             <p>About</p>
           </router-link>
+          <a @click="signOut"><p>Log Out</p></a>
         </div>
       </div>
     </div>
@@ -56,10 +56,10 @@
         <router-link to="/write">
           <p>Write</p>
         </router-link>
-        <a @click="signOut"><p>Log Out</p></a>
         <router-link to="/about">
           <p>About</p>
         </router-link>
+        <a @click="signOut"><p>Log Out</p></a>
       </div>
     </div>
   </div>
